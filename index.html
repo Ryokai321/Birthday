@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Happy Birthday Madhu & Subha</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient animated background -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div id="cursor-glow" aria-hidden="true"></div>
+
+  <!-- Sound toggle (always visible) -->
+  <button id="sound-toggle" class="icon-btn" aria-label="Toggle sound">🔇</button>
+  <button id="restart-btn" class="icon-btn" aria-label="Restart experience">↺</button>
+
+  <main id="app">
+
+    <!-- ================= SCREEN: ARCHERY ================= -->
+    <section class="screen active" id="screen-archery" data-screen="archery">
+      <div class="screen-inner archery-inner">
+        <p class="eyebrow fade-in-up">Before entering the birthday celebration...</p>
+        <h1 class="glow-text fade-in-up delay-1">Complete one little challenge 🎯</h1>
+        <p class="sub fade-in-up delay-2">Hit the bullseye to unlock the surprise.</p>
+
+        <div class="archery-stage" id="archery-stage">
+          <div class="target-wrap" id="target-wrap">
+            <svg id="target-svg" viewBox="0 0 220 220" width="220" height="220" aria-hidden="true">
+              <circle cx="110" cy="110" r="100" class="ring ring-outer"></circle>
+              <circle cx="110" cy="110" r="72" class="ring ring-3"></circle>
+              <circle cx="110" cy="110" r="46" class="ring ring-2"></circle>
+              <circle cx="110" cy="110" r="20" class="ring ring-bullseye"></circle>
+            </svg>
+          </div>
+          <div id="crosshair" aria-hidden="true"></div>
+          <div id="arrow" aria-hidden="true">🏹</div>
+          <div id="archery-message" class="archery-message" role="status"></div>
+        </div>
+
+        <p class="hint">Tap or click on the target to aim &amp; shoot</p>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN: CELEBRATION / REVEAL ================= -->
+    <section class="screen" id="screen-reveal" data-screen="reveal">
+      <div class="screen-inner reveal-inner">
+        <div class="burst" id="reveal-burst" aria-hidden="true"></div>
+        <p class="perfect-shot glow-text">Perfect Shot! 🎯✨</p>
+        <h1 class="title-xl glow-text">🎉 HAPPY BIRTHDAY 🎉</h1>
+        <h2 class="title-names">Madhu &amp; Subha ❤️</h2>
+        <p class="sub">Two sisters. One special day. Double the happiness.</p>
+        <button class="glow-btn" id="enter-surprise-btn">Enter Your Birthday Surprise 💝</button>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN: MAIN BIRTHDAY PAGE ================= -->
+    <section class="screen" id="screen-birthday" data-screen="birthday">
+      <div class="screen-inner">
+        <h1 class="title-xl glow-text">Happy Birthday, Madhu &amp; Subha! 🎂❤️</h1>
+        <p class="sub">Because two birthdays are better than one.</p>
+        <div class="divider" aria-hidden="true"></div>
+
+        <div class="cards-row">
+          <button class="sister-card card-madhu" id="card-madhu" aria-label="Open Madhu's gift">
+            <span class="card-icon">🌸</span>
+            <span class="card-name">MADHU</span>
+            <span class="card-cta">Open My Gift 💌</span>
+          </button>
+          <button class="sister-card card-subha" id="card-subha" aria-label="Open Subha's gift">
+            <span class="card-icon">🌷</span>
+            <span class="card-name">SUBHA</span>
+            <span class="card-cta">Open My Gift 💌</span>
+          </button>
+        </div>
+
+        <p class="progress-note" id="progress-note"></p>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN: MADHU ENVELOPE / LETTER ================= -->
+    <section class="screen" id="screen-madhu" data-screen="madhu">
+      <div class="screen-inner">
+        <p class="eyebrow" id="madhu-envelope-label">A little letter for Madhu 💌</p>
+
+        <div class="envelope-scene" id="madhu-envelope-scene">
+          <button class="envelope madhu-envelope" id="madhu-envelope" aria-label="Open Madhu's letter">
+            <span class="envelope-flap"></span>
+            <span class="envelope-body"></span>
+            <span class="envelope-heart">🌸</span>
+          </button>
+        </div>
+
+        <article class="letter-paper" id="madhu-letter" hidden>
+          <div class="letter-text" id="madhu-letter-text"></div>
+        </article>
+
+        <div class="letter-nav" id="madhu-nav" hidden>
+          <button class="ghost-btn" id="madhu-to-birthday">← Back</button>
+          <button class="glow-btn small" id="madhu-to-subha">Now check Subha's letter 🌷</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN: SUBHA ENVELOPE / LETTER ================= -->
+    <section class="screen" id="screen-subha" data-screen="subha">
+      <div class="screen-inner">
+        <p class="eyebrow" id="subha-envelope-label">A little letter for Subha 💌</p>
+
+        <div class="envelope-scene" id="subha-envelope-scene">
+          <button class="envelope subha-envelope" id="subha-envelope" aria-label="Open Subha's letter">
+            <span class="envelope-flap"></span>
+            <span class="envelope-body"></span>
+            <span class="envelope-heart">🌷</span>
+          </button>
+        </div>
+
+        <article class="letter-paper" id="subha-letter" hidden>
+          <div class="letter-text" id="subha-letter-text"></div>
+        </article>
+
+        <div class="letter-nav" id="subha-nav" hidden>
+          <button class="ghost-btn" id="subha-to-birthday">← Back</button>
+          <button class="glow-btn small" id="subha-to-madhu">Now check Madhu's letter 🌸</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN: FINAL TWIN CELEBRATION ================= -->
+    <section class="screen" id="screen-final" data-screen="final">
+      <div class="screen-inner">
+        <h1 class="title-xl glow-text">🎉 THE BIRTHDAY DUO 🎉</h1>
+        <p class="duo-text">
+          Two sisters.<br>
+          Two personalities.<br>
+          One special bond.<br>
+          And twice the reason to celebrate. ❤️
+        </p>
+        <button class="glow-btn" id="to-cake-btn">See Your Cake 🎂</button>
+      </div>
+    </section>
+
+    <!-- ================= SCREEN: CAKE ================= -->
+    <section class="screen" id="screen-cake" data-screen="cake">
+      <div class="screen-inner cake-inner">
+        <h2 class="glow-text" id="cake-heading">Make a wish before you blow the candles 🎂</h2>
+
+        <div class="cake" id="cake">
+          <div class="candle-row" id="candle-row">
+            <div class="candle"><span class="flame"></span></div>
+            <div class="candle"><span class="flame"></span></div>
+            <div class="candle"><span class="flame"></span></div>
+          </div>
+          <div class="cake-layer layer-top"></div>
+          <div class="cake-layer layer-mid"></div>
+          <div class="cake-layer layer-base"></div>
+          <div class="cake-plate"></div>
+        </div>
+
+        <button class="glow-btn" id="wish-btn">Make a Wish ✨</button>
+
+        <div class="final-message" id="final-message" hidden>
+          <p class="glow-text">May all your wishes come true! ✨❤️</p>
+          <p class="title-xl glow-text">Happy Birthday again, Madhu &amp; Subha! 🎂🎉❤️</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Confetti / particle / floating-heart layer, populated by JS -->
+  <div id="fx-layer" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
